@@ -21,10 +21,12 @@ begin
     process
     begin
         rst <= '0'; wait for 0.5 ps;
+        rst <= '1';
         clk <= '1';  wait for 0.5 ps;
-        clk <= '0'; rst <= '1'; wait for 0.5 ps;
-        clk <= '1';  wait for 0.5 ps;
-        clk <= '0'; rst <= '0'; wait for 0.5 ps;
+        rst <= '0';
+        clk <= '0'; wait for 0.5 ps;
+        clk <= '1'; wait for 0.5 ps;
+        clk <= '0'; wait for 0.5 ps;
         for i in 0 to 350 loop
             clk <= '1';  wait for 0.5 ps;
             clk <= '0';  wait for 0.5 ps;
