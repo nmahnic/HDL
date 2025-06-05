@@ -23,7 +23,7 @@ begin
         clk <= '0'; rst <= '1'; wait for 0.5 fs;
         clk <= '1';  wait for 0.5 fs;
         clk <= '0'; rst <= '0'; wait for 0.5 fs;
-        for i in 0 to 50 loop
+        for i in 0 to 120 loop
             clk <= '1';  wait for 0.5 fs;
             clk <= '0';  wait for 0.5 fs;
         end loop;

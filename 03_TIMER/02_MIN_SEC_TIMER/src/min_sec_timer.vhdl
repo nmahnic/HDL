@@ -2,17 +2,18 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity decimal_timer is
+entity min_sec_timer is
     port(
         clk: in std_logic;
         rst: in std_logic;
         S0: out std_logic_vector(3 downto 0);
         S1: out std_logic_vector(3 downto 0);
-        S2: out std_logic_vector(3 downto 0)
+        S2: out std_logic_vector(3 downto 0);
+        S3: out std_logic_vector(3 downto 0)
     );
-end decimal_timer;
+end min_sec_timer;
 
-architecture behavior of decimal_timer is
+architecture behavior of min_sec_timer is
     signal Co: std_logic_vector(2 downto 0);
     signal max_count, internal_rst: std_logic;
 
@@ -59,7 +60,15 @@ begin
             co => Co(2)
         );
 
-    c3: counter60c
+    c3: counter10c
+        port map(
+            clk => Co(2),
+            rst => rst,
+            S => S3,
+            co => open
+        );
+
+    c4: counter60c
         port map(
             clk => clk,
             rst => rst,

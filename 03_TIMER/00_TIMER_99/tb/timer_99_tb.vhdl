@@ -1,21 +1,20 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity decimal_timer_tb is
+entity timer_99_tb is
 end entity;
 
-architecture test of decimal_timer_tb is
-    signal clk, rst : std_logic;
+architecture test of timer_99_tb is
+    signal clk, rst, c_o : std_logic;
     signal S0, S1: std_logic_vector(3 downto 0);
-    signal S2: std_logic_vector(3 downto 0);
 begin
-    uut: entity work.decimal_timer
+    uut: entity work.timer_99
         port map(
             clk => clk,
             rst => rst,
             S0 => S0,
             S1 => S1,
-            S2 => S2
+            c_o => c_o
         );
 
     process
@@ -27,7 +26,7 @@ begin
         clk <= '0'; wait for 0.5 ps;
         clk <= '1'; wait for 0.5 ps;
         clk <= '0'; wait for 0.5 ps;
-        for i in 0 to 350 loop
+        for i in 0 to 1000 loop
             clk <= '1';  wait for 0.5 ps;
             clk <= '0';  wait for 0.5 ps;
         end loop;

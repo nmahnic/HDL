@@ -1,16 +1,17 @@
-DUT ?= V1
-NAME=counter_10_c_
-COMP1=src/ff_d.vhdl
-SRC=src/$(NAME)$(DUT).vhdl
-TB=tb/$(NAME)tb.vhdl
-TOP=$(NAME)tb
+NAME=seconds_timer
+COMP1=src/counter_10_c.vhdl
+COMP2=src/counter_60_c.vhdl
+SRC=src/$(NAME).vhdl
+TB=tb/$(NAME)_tb.vhdl
+TOP=$(NAME)_tb
 BUILD_DIR=build
 
-VCD=$(BUILD_DIR)/wave_$(NAME)$(DUT).vcd
+VCD=$(BUILD_DIR)/wave_$(NAME).vcd
 
 $(BUILD_DIR)/wave.vcd: $(SRC) $(TB) clean
 	mkdir -p $(BUILD_DIR)
 	ghdl -a --workdir=$(BUILD_DIR) $(COMP1)
+	ghdl -a --workdir=$(BUILD_DIR) $(COMP2)
 	ghdl -a --workdir=$(BUILD_DIR) $(SRC)
 	ghdl -a --workdir=$(BUILD_DIR) $(TB)
 	ghdl -e --workdir=$(BUILD_DIR) $(TOP)
