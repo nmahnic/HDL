@@ -14,7 +14,7 @@ end ff_rs;
 architecture behavior of ff_rs is
     signal q_signal : std_logic;
 begin
-    process(r, s, clk)
+    process(clk)
     begin
         if(rising_edge(clk)) then
             if(r = '1' and s = '1') then
