@@ -1,13 +1,14 @@
+V ?= V1
 DUT ?= asc
 NAME=counter_4_bits_
 COMP1=src/ff_t.vhdl
 COMP2=src/ff_d.vhdl
-SRC=src/$(NAME)$(DUT).vhdl
+SRC=src/$(NAME)$(DUT)$(V).vhdl
 TB=tb/$(NAME)tb.vhdl
 TOP=$(NAME)tb
 BUILD_DIR=build
 
-VCD=$(BUILD_DIR)/wave_$(NAME)$(DUT).vcd
+VCD=$(BUILD_DIR)/wave_$(NAME)$(DUT)$(V).vcd
 
 $(BUILD_DIR)/wave.vcd: $(SRC) $(TB) clean
 	mkdir -p $(BUILD_DIR)
