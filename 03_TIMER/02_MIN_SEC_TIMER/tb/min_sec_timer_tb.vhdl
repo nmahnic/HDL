@@ -28,7 +28,7 @@ begin
         clk <= '0'; wait for 0.5 ps;
         clk <= '1'; wait for 0.5 ps;
         clk <= '0'; wait for 0.5 ps;
-        for i in 0 to 1000 loop
+        for i in 0 to 10000 loop
             clk <= '1';  wait for 0.5 ps;
             clk <= '0';  wait for 0.5 ps;
         end loop;
