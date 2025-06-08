@@ -14,7 +14,7 @@ end bank_regs_2_1_bit;
 
 architecture behavior of bank_regs_2_1_bit is
     signal r0_l, r1_l : std_logic;
-    signal r0_q, r1_q : std_logic := '0';
+    signal r0_q, r1_q : std_logic;
 
     component register_1_bit
         port(

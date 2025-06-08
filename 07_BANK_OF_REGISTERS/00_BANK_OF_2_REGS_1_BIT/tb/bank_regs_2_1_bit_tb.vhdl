@@ -5,73 +5,96 @@ entity bank_regs_2_1_bit_tb is
 end entity;
 
 architecture test of bank_regs_2_1_bit_tb is
-    signal clk, rst, wr, q : std_logic;
-    signal d, addr : std_logic;
-
+    signal clk : std_logic := '0';
+    signal rst, wr, d, addr, q : std_logic;
 begin
 
+    -- Instancia del UUT
     uut: entity work.bank_regs_2_1_bit
         port map(
-            clk => clk,
-            rst => rst,
-            d => d,
-            wr => wr,
+            clk  => clk,
+            rst  => rst,
+            d    => d,
+            wr   => wr,
             addr => addr,
-            q => q
+            q    => q
         );
 
-    process
+    -- Generador de clock
+    clk <=  '1' after 5 ps when clk = '0' else
+            '0' after 5 ps when clk = '1';
+
+    -- Estímulos
+    stim_proc: process
     begin
-        addr <= '0';
-        rst <= '0'; wait for 0.5 ps;
-        rst <= '1';
-        clk <= '1'; wait for 0.5 ps;
-        rst <= '0';
-        clk <= '0'; wait for 0.5 ps;
-        clk <= '1'; d <= '1'; wait for 0.5 ps;
-        clk <= '0'; d <= '0'; wait for 0.5 ps;
-        clk <= '1'; d <= '1'; wr <= '1'; wait for 0.5 ps;
-        clk <= '0'; wr <= '0'; wait for 0.5 ps;
-        clk <= '1'; wait for 0.5 ps;
-        clk <= '0'; wait for 0.5 ps;
-        clk <= '1'; d <= '0'; wr <= '1'; wait for 0.5 ps;
-        clk <= '0'; wr <= '0'; wait for 0.5 ps;
-        clk <= '1'; wait for 0.5 ps;
-        clk <= '1'; d <= '1'; wait for 0.5 ps;
-        clk <= '0'; d <= '0'; wait for 0.5 ps;
+        -- Reset
+        rst <= '0'; wait for 10 ps;
+        rst <= '1'; wait for 10 ps;
+        rst <= '0'; wait for 10 ps;
 
-        clk <= '1'; d <= '1'; wr <= '1'; wait for 0.5 ps;
-        clk <= '0'; wr <= '0'; wait for 0.5 ps;
+        -- At addr = '0'
+        -- Write '1'
+        addr <= '0'; d <= '1'; wr <= '1'; wait for 10 ps;
+        wr <= '0'; wait for 10 ps;
 
-        for i in 0 to 10 loop
-            clk <= '1'; wait for 0.5 ps;
-            clk <= '0'; wait for 0.5 ps;
-        end loop;
+        addr <= '0'; wait for 10 ps; -- Read at addr = '0
+        addr <= '1'; wait for 10 ps; -- Read at addr = '1'
 
-        clk <= '1'; d <= '0'; wr <= '1'; wait for 0.5 ps;
-        clk <= '0'; wr <= '0'; wait for 0.5 ps;
+        -- Write '0'
+        d <= '0'; wr <= '1'; wait for 10 ps;
+        wr <= '0'; wait for 10 ps;
 
-        for i in 0 to 10 loop
-            clk <= '1'; wait for 0.5 ps;
-            clk <= '0'; wait for 0.5 ps;
-        end loop;
+        addr <= '0'; wait for 10 ps; -- Read at addr = '0
+        addr <= '1'; wait for 10 ps; -- Read at addr = '1'
 
-        clk <= '1'; d <= '1'; wr <= '1'; wait for 0.5 ps;
-        clk <= '0'; d <= '0'; wr <= '0'; wait for 0.5 ps;
+        -- Write '0'
+        d <= '0'; wr <= '1'; wait for 10 ps;
+        wr <= '0'; wait for 10 ps;
 
-        for i in 0 to 10 loop
-            clk <= '1'; wait for 0.5 ps;
-            clk <= '0'; wait for 0.5 ps;
-        end loop;
+        addr <= '0'; wait for 10 ps; -- Read at addr = '0
+        addr <= '1'; wait for 10 ps; -- Read at addr = '1'
 
-        clk <= '1'; d <= '0'; wr <= '1'; wait for 0.5 ps;
-        clk <= '0'; d <= '1'; wr <= '0'; wait for 0.5 ps;
+        -- Write '1'
+        d <= '1'; wr <= '1'; wait for 10 ps;
+        wr <= '0'; wait for 10 ps;
 
-        for i in 0 to 10 loop
-            clk <= '1'; wait for 0.5 ps;
-            clk <= '0'; wait for 0.5 ps;
-        end loop;
+        addr <= '0'; wait for 10 ps; -- Read at addr = '0
+        addr <= '1'; wait for 10 ps; -- Read at addr = '1'
 
+        -- At addr = '1'
+        -- Write '1'
+        addr <= '1'; d <= '1'; wr <= '1'; wait for 10 ps;
+        wr <= '0'; wait for 10 ps;
+
+        addr <= '0'; wait for 10 ps; -- Read at addr = '0
+        addr <= '1'; wait for 10 ps; -- Read at addr = '1'
+
+        -- Write '0'
+        d <= '0'; wr <= '1'; wait for 10 ps;
+        wr <= '0'; wait for 10 ps;
+
+        addr <= '0'; wait for 10 ps; -- Read at addr = '0
+        addr <= '1'; wait for 10 ps; -- Read at addr = '1'
+
+        -- Write '0'
+        d <= '0'; wr <= '1'; wait for 10 ps;
+        wr <= '0'; wait for 10 ps;
+
+        addr <= '0'; wait for 10 ps; -- Read at addr = '0
+        addr <= '1'; wait for 10 ps; -- Read at addr = '1'
+
+        -- Write '1'
+        d <= '1'; wr <= '1'; wait for 10 ps;
+        wr <= '0'; wait for 10 ps;
+
+
+        addr <= '0'; wait for 10 ps; -- Read at addr = '0
+        addr <= '1'; wait for 10 ps; -- Read at addr = '1'
+
+        -- Lectura en addr = 1
+        addr <= '1'; wait for 20 ps;
+
+        -- Fin de simulación
         wait;
     end process;
 

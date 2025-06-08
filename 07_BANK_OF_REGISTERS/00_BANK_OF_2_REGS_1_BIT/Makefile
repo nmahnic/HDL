@@ -14,7 +14,7 @@ $(BUILD_DIR)/wave.vcd: $(SRC) $(TB) clean
 	ghdl -a --workdir=$(BUILD_DIR) $(SRC)
 	ghdl -a --workdir=$(BUILD_DIR) $(TB)
 	ghdl -e --workdir=$(BUILD_DIR) $(TOP)
-	ghdl -r --workdir=$(BUILD_DIR) $(TOP) --vcd=$(VCD)
+	ghdl -r --workdir=$(BUILD_DIR) $(TOP) --vcd=$(VCD) --stop-time=10ns
 
 view: $(BUILD_DIR)/wave.vcd
 	gtkwave $(VCD)
