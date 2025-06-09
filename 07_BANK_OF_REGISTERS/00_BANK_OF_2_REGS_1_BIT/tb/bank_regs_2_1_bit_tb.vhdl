@@ -32,67 +32,51 @@ begin
         rst <= '1'; wait for 10 ps;
         rst <= '0'; wait for 10 ps;
 
-        -- At addr = '0'
-        -- Write '1'
-        addr <= '0'; d <= '1'; wr <= '1'; wait for 10 ps;
-        wr <= '0'; wait for 10 ps;
-
-        addr <= '0'; wait for 10 ps; -- Read at addr = '0
-        addr <= '1'; wait for 10 ps; -- Read at addr = '1'
-
-        -- Write '0'
-        d <= '0'; wr <= '1'; wait for 10 ps;
-        wr <= '0'; wait for 10 ps;
-
-        addr <= '0'; wait for 10 ps; -- Read at addr = '0
-        addr <= '1'; wait for 10 ps; -- Read at addr = '1'
-
-        -- Write '0'
-        d <= '0'; wr <= '1'; wait for 10 ps;
-        wr <= '0'; wait for 10 ps;
-
-        addr <= '0'; wait for 10 ps; -- Read at addr = '0
-        addr <= '1'; wait for 10 ps; -- Read at addr = '1'
-
-        -- Write '1'
+        -- Write '1' at addr '0'
+        addr <= '0'; 
         d <= '1'; wr <= '1'; wait for 10 ps;
         wr <= '0'; wait for 10 ps;
 
         addr <= '0'; wait for 10 ps; -- Read at addr = '0
         addr <= '1'; wait for 10 ps; -- Read at addr = '1'
 
-        -- At addr = '1'
-        -- Write '1'
-        addr <= '1'; d <= '1'; wr <= '1'; wait for 10 ps;
-        wr <= '0'; wait for 10 ps;
-
-        addr <= '0'; wait for 10 ps; -- Read at addr = '0
-        addr <= '1'; wait for 10 ps; -- Read at addr = '1'
-
-        -- Write '0'
+        -- Write '0' at addr '0'
         d <= '0'; wr <= '1'; wait for 10 ps;
         wr <= '0'; wait for 10 ps;
 
         addr <= '0'; wait for 10 ps; -- Read at addr = '0
         addr <= '1'; wait for 10 ps; -- Read at addr = '1'
 
-        -- Write '0'
-        d <= '0'; wr <= '1'; wait for 10 ps;
-        wr <= '0'; wait for 10 ps;
-
-        addr <= '0'; wait for 10 ps; -- Read at addr = '0
-        addr <= '1'; wait for 10 ps; -- Read at addr = '1'
-
-        -- Write '1'
+        -- Write '1' at addr '0'
         d <= '1'; wr <= '1'; wait for 10 ps;
         wr <= '0'; wait for 10 ps;
 
+        addr <= '0'; wait for 10 ps; -- Read at addr = '0
+        addr <= '1'; wait for 10 ps; -- Read at addr = '1'
+
+        wait for 50 ps;
+
+        -- Write '1' at addr '1'
+        addr <= '1'; 
+        d <= '1'; wr <= '1'; wait for 10 ps;
+        wr <= '0'; wait for 10 ps;
 
         addr <= '0'; wait for 10 ps; -- Read at addr = '0
         addr <= '1'; wait for 10 ps; -- Read at addr = '1'
 
-        -- Lectura en addr = 1
-        addr <= '1'; wait for 20 ps;
+        -- Write '0' at addr '1'
+        d <= '0'; wr <= '1'; wait for 10 ps;
+        wr <= '0'; wait for 10 ps;
+
+        addr <= '0'; wait for 10 ps; -- Read at addr = '0
+        addr <= '1'; wait for 10 ps; -- Read at addr = '1'
+
+        -- Write '1' at addr '1'
+        d <= '1'; wr <= '1'; wait for 10 ps;
+        wr <= '0'; wait for 10 ps;
+
+        addr <= '0'; wait for 10 ps; -- Read at addr = '0
+        addr <= '1'; wait for 10 ps; -- Read at addr = '1'
 
         -- Fin de simulación
         wait;
